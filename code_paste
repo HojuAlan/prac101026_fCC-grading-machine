@@ -1,0 +1,55 @@
+//note that hasPassingGrade takes the grade number integer, not a letter-grade. It uses the getGrade function to determine a pass or fail. Also, the
+//studentMsg function uses the scoresArray and finalScore independently, which might be unintuitive (you can have a final score that is different to the average score).
+
+function getAverage(scoresArray) {
+  let averageScore
+  let totalScore = 0
+  let gradesNum = scoresArray.length
+  for (let i of scoresArray) {
+    totalScore += i
+  }
+  averageScore = totalScore/gradesNum
+  return averageScore
+}
+
+function getGrade(studentScore) {
+  let letterGrade = ''
+  if (studentScore == 100) {
+    letterGrade = 'A+'
+  } else if (studentScore >= 90) {
+    letterGrade = 'A'
+  } else if (studentScore >= 80) {
+    letterGrade = 'B'
+  } else if (studentScore >= 70) {
+    letterGrade = 'C'
+  } else if (studentScore >= 60) {
+    letterGrade = 'D'
+  } else if (studentScore < 60) {
+    letterGrade = 'F'
+  }
+  return letterGrade
+}
+
+function hasPassingGrade(checkGradeNum) {
+  let isPass = true
+  let grade = ''
+  grade = getGrade(checkGradeNum)
+  console.log(grade)
+  if (grade == 'F') {
+    isPass = false
+  }
+  return isPass
+}
+
+
+function studentMsg(scoresArray, finalScore) {
+  let average = getAverage(scoresArray)
+  let grade = getGrade(finalScore)
+  if (hasPassingGrade(finalScore) === true) {
+    return `Class average: ${average}. Your grade: ${grade}. You passed the course.`
+  } else {
+    return `Class average: ${average}. Your grade: ${grade}. You failed the course.`
+  }
+}
+
+console.log(studentMsg([92, 88, 12, 77, 57, 100, 67, 38, 97, 89], 37))
